@@ -3,5 +3,7 @@
     "description": "A RaspberryPi Alarme project written in Php.",
     "type": "project",
     "license": "MIT",
-    "require": {}
+    "require": {
+        "piphp/gpio": "^0.3.3"
+    }
 }
