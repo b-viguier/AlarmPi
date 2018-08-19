@@ -1,0 +1,7 @@
+{
+    "name": "bviguier/alarm-pi",
+    "description": "A RaspberryPi Alarme project written in Php.",
+    "type": "project",
+    "license": "MIT",
+    "require": {}
+}
