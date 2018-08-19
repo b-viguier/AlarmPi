@@ -3,6 +3,11 @@
     "description": "A RaspberryPi Alarme project written in Php.",
     "type": "project",
     "license": "MIT",
+    "autoload": {
+    "psr-4": {
+        "bviguier\\AlarmPi\\": "src/"
+    }
+},
     "require": {
         "piphp/gpio": "^0.3.3"
     }
