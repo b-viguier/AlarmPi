@@ -27,43 +27,42 @@ use PiPHP\GPIO\Pin\PinInterface;
 
 class LiquidCrystal
 {
-
-    private const LCD_CLEARDISPLAY = 0x01;
-    private const LCD_RETURNHOME = 0x02;
-    private const LCD_ENTRYMODESET = 0x04;
-    private const LCD_DISPLAYCONTROL = 0x08;
-    private const LCD_CURSORSHIFT = 0x10;
-    private const LCD_FUNCTIONSET = 0x20;
-    private const LCD_SETCGRAMADDR = 0x40;
-    private const LCD_SETDDRAMADDR = 0x80;
+    const LCD_CLEARDISPLAY = 0x01;
+    const LCD_RETURNHOME = 0x02;
+    const LCD_ENTRYMODESET = 0x04;
+    const LCD_DISPLAYCONTROL = 0x08;
+    const LCD_CURSORSHIFT = 0x10;
+    const LCD_FUNCTIONSET = 0x20;
+    const LCD_SETCGRAMADDR = 0x40;
+    const LCD_SETDDRAMADDR = 0x80;
 
 // flags for display entry mode
-    private const LCD_ENTRYRIGHT = 0x00;
-    private const LCD_ENTRYLEFT = 0x02;
-    private const LCD_ENTRYSHIFTINCREMENT = 0x01;
-    private const LCD_ENTRYSHIFTDECREMENT = 0x00;
+    const LCD_ENTRYRIGHT = 0x00;
+    const LCD_ENTRYLEFT = 0x02;
+    const LCD_ENTRYSHIFTINCREMENT = 0x01;
+    const LCD_ENTRYSHIFTDECREMENT = 0x00;
 
 // flags for display on/off control
-    private const LCD_DISPLAYON = 0x04;
-    private const LCD_DISPLAYOFF = 0x00;
-    private const LCD_CURSORON = 0x02;
-    private const LCD_CURSOROFF = 0x00;
-    private const LCD_BLINKON = 0x01;
-    private const LCD_BLINKOFF = 0x00;
+    const LCD_DISPLAYON = 0x04;
+    const LCD_DISPLAYOFF = 0x00;
+    const LCD_CURSORON = 0x02;
+    const LCD_CURSOROFF = 0x00;
+    const LCD_BLINKON = 0x01;
+    const LCD_BLINKOFF = 0x00;
 
 // flags for display/cursor shift
-    private const LCD_DISPLAYMOVE = 0x08;
-    private const LCD_CURSORMOVE = 0x00;
-    private const LCD_MOVERIGHT = 0x04;
-    private const LCD_MOVELEFT = 0x00;
+    const LCD_DISPLAYMOVE = 0x08;
+    const LCD_CURSORMOVE = 0x00;
+    const LCD_MOVERIGHT = 0x04;
+    const LCD_MOVELEFT = 0x00;
 
 // flags for function set
-    private const LCD_8BITMODE = 0x10;
-    private const LCD_4BITMODE = 0x00;
-    private const LCD_2LINE = 0x08;
-    private const LCD_1LINE = 0x00;
-    private const LCD_5x10DOTS = 0x04;
-    private const LCD_5x8DOTS = 0x00;
+    const LCD_8BITMODE = 0x10;
+    const LCD_4BITMODE = 0x00;
+    const LCD_2LINE = 0x08;
+    const LCD_1LINE = 0x00;
+    const LCD_5x10DOTS = 0x04;
+    const LCD_5x8DOTS = 0x00;
 
 
     /** @var  OutputPinInterface */
@@ -331,6 +330,13 @@ class LiquidCrystal
         }
     }
 
+    public function print(string $s)
+    {
+      for($i=0, $l = strlen($s);$i<$l; ++$i) {
+          $this->write(ord($s[$i]));
+      }
+    }
+
     /*********** mid level commands, for sending data/cmds */
 
     public function command(int $value)
@@ -353,7 +359,7 @@ class LiquidCrystal
         $this->_rs_pin->setValue($mode);
 
         // if there is a RW pin indicated, set it low to Write
-        if ($this->_rw_pin != 255) {
+        if ($this->_rw_pin != null) {
             $this->_rw_pin->setValue(PinInterface::VALUE_LOW);
         }
 
